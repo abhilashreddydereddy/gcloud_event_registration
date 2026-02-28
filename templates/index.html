@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Registration</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f6f8;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            height:100vh;
+        }
+
+        .container{
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.1);
+            width:400px;
+            text-align:center;
+        }
+
+        h1{
+            margin-bottom:20px;
+        }
+
+        input{
+            width:90%;
+            padding:10px;
+            margin:8px 0;
+            border-radius:5px;
+            border:1px solid #ccc;
+        }
+
+        button{
+            padding:10px 18px;
+            margin-top:10px;
+            border:none;
+            border-radius:5px;
+            background:#007BFF;
+            color:white;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#0056b3;
+        }
+
+        table{
+            margin-top:20px;
+            border-collapse:collapse;
+            width:100%;
+        }
+
+        th, td{
+            border:1px solid #ddd;
+            padding:8px;
+            text-align:left;
+        }
+
+        th{
+            background:#007BFF;
+            color:white;
+        }
+
+        #users{
+            display:none;
+            margin-top:20px;
+        }
+    </style>
+
+    <script>
+        function toggleUsers(){
+            const section = document.getElementById("users");
+            if(section.style.display === "none"){
+                section.style.display = "block";
+            } else{
+                section.style.display = "none";
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Event Registration</h1>
+
+<form action="/register" method="POST">
+
+<input type="text" name="name" placeholder="Enter Name" required>
+
+<input type="email" name="email" placeholder="Enter Email" required>
+
+<input type="text" name="event" placeholder="Event Name" required>
+
+<br>
+
+<button type="submit">Register</button>
+
+</form>
+
+<br>
+
+<button onclick="toggleUsers()">Show Registered People</button>
+
+<div id="users">
+
+<h3>Registered Participants</h3>
+
+<table>
+
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Event</th>
+</tr>
+
+{% for r in registrations %}
+
+<tr>
+<td>{{ r.name }}</td>
+<td>{{ r.email }}</td>
+<td>{{ r.event }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
